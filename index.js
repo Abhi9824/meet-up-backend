@@ -60,10 +60,6 @@ app.post("/events", async (req, res) => {
   }
 });
 
-app.get("/", async (req, res) => {
-  res.send("Hello Express");
-});
-
 async function readCardBytitle(eventName) {
   try {
     const title = await Event.find({ eventName: eventName });
@@ -88,7 +84,7 @@ app.get("/events/:eventName", async (req, res) => {
 
 async function readCardByTags(eventTags) {
   try {
-    const tags = await Event.findAll({ tags: eventTags });
+    const tags = await Event.find({ tags: eventTags });
     return tags;
   } catch (error) {
     throw error;
@@ -133,6 +129,10 @@ app.post("/events/id/:eventId", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Failed to update the event." });
   }
+});
+
+app.get("/", async (req, res) => {
+  res.send("Meet-Up app");
 });
 
 const PORT = 3000;
